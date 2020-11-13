@@ -10,10 +10,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private Button CreateRoomButton;
 
     [SerializeField] private Button JoinRandomRoomButton;
+
+    [SerializeField] private InputField Test;
     // Start is called before the first frame update
     void Start()
     {
-        InitPlayer("sashawik");
+        InitPlayer("sashawik132");
         InitRooms();
     }
 
