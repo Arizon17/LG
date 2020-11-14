@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IPunObservable
 {
-    [SerializeField] private Stats playerStat; 
+    [SerializeField] private Stats playerStat = new Stats(); 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,19 +17,28 @@ public class PlayerStats : MonoBehaviour, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerStat.Health += 1;
+        }
     }
 
+    public ushort GetHealth()
+    {
+        return playerStat.Health;
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
             stream.SendNext(playerStat);
+            Debug.Log(" From write : " + playerStat.Health);
         }
 
         if (stream.IsReading)
         {
             playerStat = (Stats) stream.ReceiveNext();
+            Debug.Log(" From read : " + playerStat.Health);
         }
     }
     
