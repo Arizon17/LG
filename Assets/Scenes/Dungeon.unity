@@ -1499,8 +1499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c39b585375db34981e7dcc9aafba19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPosition: {fileID: 1227485816}
-  PlayerPferab: {fileID: 111190646877225649, guid: a3393e303373a35409f81e80ebacaaa4,
+  startPosition: {fileID: 1227485816}
+  playerPferab: {fileID: 111190646877225649, guid: a3393e303373a35409f81e80ebacaaa4,
     type: 3}
 --- !u!1 &1227485815
 GameObject:
