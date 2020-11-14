@@ -7,25 +7,23 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private Button CreateRoomButton;
+    [SerializeField] private Button createRoomButton;
 
-    [SerializeField] private Button JoinRandomRoomButton;
-
-    [SerializeField] private InputField Test;
-    // Start is called before the first frame update
+    [SerializeField] private Button joinRandomRoomButton;
+public string Username { get; set; }
     void Start()
     {
-        InitPlayer("sashawik132");
+        InitPlayer(Username);
         InitRooms();
     }
 
     void InitRooms()
     {
-        CreateRoomButton.onClick.AddListener(() =>
+        createRoomButton.onClick.AddListener(() =>
         {
             CreateRoom(PhotonNetwork.NickName, 2);
         });
-        JoinRandomRoomButton.onClick.AddListener(() =>
+        joinRandomRoomButton.onClick.AddListener(() =>
         {
             JoinRandomRoom();
         });
@@ -46,8 +44,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 #if UNITY_EDITOR
         Debug.Log("Connected to master");
 #endif
-        CreateRoomButton.enabled = true;
-        JoinRandomRoomButton.enabled = true;
+        createRoomButton.enabled = true;
+        joinRandomRoomButton.enabled = true;
     }
 
     void CreateRoom(string PlayerRoom, byte MaxPlayerInRoom)
