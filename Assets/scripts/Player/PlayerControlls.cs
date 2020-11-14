@@ -2,15 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class PlayerControlls : MonoBehaviourPunCallbacks
 {
     private PhotonView photonView;
+
+    private PlayerStats stats;
     // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
+        stats = GetComponent<PlayerStats>();
+
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
 
             if (Input.GetKey(KeyCode.Return))
             {
-                
+
             }
         }
     }
