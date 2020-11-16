@@ -5,12 +5,13 @@ using UnityEngine;
 [Serializable]
 public class Stats
 {
+    public ushort MaxHealth;
     public ushort Health;
     public ushort Damage;
 
     public Stats()
     {
-        Health = 100;
+        MaxHealth = Health = 100;
         Damage = 1;
     }
 }

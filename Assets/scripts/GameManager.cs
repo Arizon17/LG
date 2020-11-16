@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +14,7 @@ namespace FamilyWikGame
     {
         [SerializeField] private Transform startPosition;
         public GameObject playerPferab;
-        [SerializeField] private Slider PlayerHealdSlider;
+        [SerializeField] private Image PlayerHealth;
 
         public static GameManager _instance;
 
@@ -21,11 +23,10 @@ namespace FamilyWikGame
         {
             InitPlayer();
             Init();
-            PlayerHealdSlider.maxValue = 100;
         }
-        public void UpdateUI(int health)
+        public void UpdateUI(float health, float maxHealth)
         {
-            PlayerHealdSlider.value = health;
+            PlayerHealth.fillAmount = health / maxHealth;
         }
         void Init()
         {
@@ -34,15 +35,17 @@ namespace FamilyWikGame
             else Destroy(gameObject);
             DontDestroyOnLoad(this);
         }
-
-        void InitPlayer()
-        {
-            PhotonNetwork.Instantiate(playerPferab.name, startPosition.position, Quaternion.identity);
-        }
+        
 
         // Update is called once per frame
         void Update()
         {
+            
+        }
+
+        void InitPlayer()
+        {
+            PhotonNetwork.Instantiate(playerPferab.name, startPosition.position, Quaternion.identity);
         }
 
         public void ShowChat()
@@ -52,7 +55,6 @@ namespace FamilyWikGame
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             Debug.Log(newPlayer.NickName);
-            gameObject.name = newPlayer.NickName;
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
