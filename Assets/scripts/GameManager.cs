@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FamilyWikGame
 {
@@ -11,6 +12,7 @@ namespace FamilyWikGame
     {
         [SerializeField] private Transform startPosition;
         public GameObject playerPferab;
+        [SerializeField] private Slider PlayerHealdSlider;
 
         public static GameManager _instance;
 
@@ -19,8 +21,12 @@ namespace FamilyWikGame
         {
             InitPlayer();
             Init();
+            PlayerHealdSlider.maxValue = 100;
         }
-
+        public void UpdateUI(int health)
+        {
+            PlayerHealdSlider.value = health;
+        }
         void Init()
         {
             if (_instance == null)
@@ -46,6 +52,7 @@ namespace FamilyWikGame
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             Debug.Log(newPlayer.NickName);
+            gameObject.name = newPlayer.NickName;
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)

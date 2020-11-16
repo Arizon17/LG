@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private Button createRoomButton;
 
     [SerializeField] private Button joinRandomRoomButton;
+    [SerializeField] private GameObject createRoomPanel;
 public string Username { get; set; }
     void Start()
     {
@@ -21,7 +23,7 @@ public string Username { get; set; }
     {
         createRoomButton.onClick.AddListener(() =>
         {
-            CreateRoom(PhotonNetwork.NickName, 2);
+            CreateRoom();
         });
         joinRandomRoomButton.onClick.AddListener(() =>
         {
@@ -46,28 +48,25 @@ public string Username { get; set; }
 #endif
         createRoomButton.enabled = true;
         joinRandomRoomButton.enabled = true;
+        AmplitudeLogger.instance.LogEvent("Player connected", "player name", PhotonNetwork.NickName);
     }
 
-    void CreateRoom(string PlayerRoom, byte MaxPlayerInRoom)
+    void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(PlayerRoom + Random.Range(0,1000).ToString(), 
-            new RoomOptions{MaxPlayers = MaxPlayerInRoom});
+        createRoomPanel.SetActive(true);
+        transform.parent.gameObject.SetActive(false);
+        createRoomPanel.transform.GetChild(0).DOLocalMove(new Vector3(0, 0, 0), 1.25f);
     }
 
     void JoinRandomRoom()
     {
         PhotonNetwork.JoinRandomRoom();
+        AmplitudeLogger.instance.LogEvent("Player joined room", "player name", PhotonNetwork.CurrentRoom.Name);
     }
 
     void JoinCustomRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
-    }
-
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Joined Room");
-        PhotonNetwork.LoadLevel("Dungeon");
     }
 
     // Update is called once per frame

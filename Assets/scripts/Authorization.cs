@@ -16,7 +16,7 @@ public class Authorization : MonoBehaviour
         createButton.onClick.AddListener((() =>
         {
             lobby.GetComponent<LobbyManager>().Username = inputField.text;
-            lobby.SetActive(true); 
+            lobby.transform.parent.gameObject.SetActive(true); 
             gameObject.SetActive(false);
         } ));
     }

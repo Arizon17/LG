@@ -2,27 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
+using FamilyWikGame;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour, IPunObservable
+public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] private Stats playerStat = new Stats(); 
+    [SerializeField] private PhotonView photonView;
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         PhotonPeer.RegisterType(typeof(Stats), (byte)244, SerializeStats, DeserializeStats);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playerStat.Health += 1;
+            playerStat.Health -= 1;
         }
+        GameManager._instance.UpdateUI(playerStat.Health);
     }
 
+    public void DealDamage(int damage)
+    {
+        if (playerStat.Health - damage > 0)
+        playerStat.Health -= playerStat.Damage;
+    }
+
+    public int GetDamage()
+    {
+        return playerStat.Damage;
+    }
     public ushort GetHealth()
     {
         return playerStat.Health;
@@ -32,13 +47,11 @@ public class PlayerStats : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(playerStat);
-            Debug.Log(" From write : " + playerStat.Health);
         }
 
         if (stream.IsReading)
         {
             playerStat = (Stats) stream.ReceiveNext();
-            Debug.Log(" From read : " + playerStat.Health);
         }
     }
     
