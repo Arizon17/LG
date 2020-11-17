@@ -14,7 +14,9 @@ namespace FamilyWikGame
     {
         [SerializeField] private Transform startPosition;
         public GameObject playerPferab;
-        [SerializeField] private Image PlayerHealth;
+        [SerializeField] private HealthBarPanel HealthBarPanel;
+        [SerializeField] private List<PlayerControlls> PlayerList;
+        [SerializeField] private List<HealthBarPanel> PartyHealthBar;
 
         public static GameManager _instance;
 
@@ -24,9 +26,22 @@ namespace FamilyWikGame
             InitPlayer();
             Init();
         }
-        public void UpdateUI(float health, float maxHealth)
+
+        public PlayerStats GetAnotherPlayer(Player player)
         {
-            PlayerHealth.fillAmount = health / maxHealth;
+            return PlayerList.First(p => p.photonView.Owner.Equals(player)).GetComponent<PlayerStats>();
+        }
+        public HealthBarPanel GetHealthBar()
+        {
+            return HealthBarPanel;
+        }
+        public HealthBarPanel GetUnactivePartyHealthBar()
+        {
+            return PartyHealthBar.First(p => p.gameObject.activeInHierarchy == false);
+        }
+        public void SetName(string text)
+        {
+            HealthBarPanel.SetNickName(text);
         }
         void Init()
         {
@@ -35,7 +50,11 @@ namespace FamilyWikGame
             else Destroy(gameObject);
             DontDestroyOnLoad(this);
         }
-        
+
+        public void AddPlayer(PlayerControlls Player)
+        {
+            PlayerList.Add(Player);
+        }
 
         // Update is called once per frame
         void Update()
@@ -46,11 +65,13 @@ namespace FamilyWikGame
         void InitPlayer()
         {
             PhotonNetwork.Instantiate(playerPferab.name, startPosition.position, Quaternion.identity);
+            
         }
 
         public void ShowChat()
         {
         }
+        
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
@@ -59,7 +80,16 @@ namespace FamilyWikGame
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            Debug.Log(otherPlayer.NickName);
+            Debug.Log("Player Left Room : " + otherPlayer.NickName);
+        }
+        public HealthBarPanel GetHealthBarByPlayer(PlayerStats player)
+        {
+            return PartyHealthBar.First(p => p.GetPlayer().Equals(player));
+        }
+
+        public void RemovePlayer(PlayerControlls player)
+        {
+            PlayerList.Remove(player);
         }
     }
 }

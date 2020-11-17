@@ -12,7 +12,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private Button joinRandomRoomButton;
     [SerializeField] private GameObject createRoomPanel;
-public string Username { get; set; }
+    public string Username { get; set; }
     void Start()
     {
         InitPlayer(Username);
@@ -34,7 +34,6 @@ public string Username { get; set; }
     {
         PhotonNetwork.NickName = nickname;
         Debug.Log("Player connected : " + PhotonNetwork.NickName);
-
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.ConnectUsingSettings();
@@ -54,14 +53,14 @@ public string Username { get; set; }
     void CreateRoom()
     {
         createRoomPanel.SetActive(true);
-        transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         createRoomPanel.transform.GetChild(0).DOLocalMove(new Vector3(0, 0, 0), 1.25f);
     }
 
     void JoinRandomRoom()
     {
         PhotonNetwork.JoinRandomRoom();
-        AmplitudeLogger.instance.LogEvent("Player joined room", "player name", PhotonNetwork.CurrentRoom.Name);
+        AmplitudeLogger.instance.LogEvent("Player joined room" , "", "");
     }
 
     void JoinCustomRoom(string roomName)

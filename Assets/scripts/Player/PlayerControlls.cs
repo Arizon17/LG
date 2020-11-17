@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FamilyWikGame;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -23,6 +24,7 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
         {
             nickText.color = Color.green;
         }
+        GameManager._instance.AddPlayer(this);
         
     }
 
@@ -53,17 +55,5 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
 
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<PlayerStats>().DealDamage(GetComponent<PlayerStats>().GetDamage());
-        }
-
-        if (other.gameObject.name == "Wall")
-            GetComponent<PlayerStats>().DealDamage(10);
-        Debug.Log(other.gameObject.name);
     }
 }
