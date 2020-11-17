@@ -17,6 +17,8 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
         photonView = GetComponent<PhotonView>();
         PhotonPeer.RegisterType(typeof(Stats), (byte)244, SerializeStats, DeserializeStats);
         InitHealthBarPanel();
+        if(photonView.IsMine)
+            Camera.main.gameObject.transform.SetParent(transform);
     }
 
     void InitHealthBarPanel()
@@ -30,7 +32,6 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
             Player = GameManager._instance.GetAnotherPlayer(photonView.Owner);
             healthBar.SetPlayer(Player);
         }
-        
         
         healthBar.SetNickName(Player.photonView.Owner.NickName);
         healthBar.UpdateHealthBar(Player.GetHealth(), Player.GetMaxHealth());
