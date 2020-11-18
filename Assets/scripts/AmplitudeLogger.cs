@@ -25,8 +25,7 @@ public class AmplitudeLogger : MonoBehaviour
         amplitude.logEvent(EventName);
         amplitude.setUserProperty(par1, par2);
         amplitude.uploadEvents();
-        Debug.Log(amplitude.getSessionId());
-        
+
     }
     // Update is called once per frame
     void Update()

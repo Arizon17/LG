@@ -17,8 +17,35 @@ namespace FamilyWikGame
         [SerializeField] private HealthBarPanel HealthBarPanel;
         [SerializeField] private List<PlayerControlls> PlayerList;
         [SerializeField] private List<HealthBarPanel> PartyHealthBar;
-
+        public DungeonItemSet dungeonItemSet;
+        public ItemSO itemSo;
+        [SerializeField] private CreateInventory inventoryVisualize;
+        private bool isInventoryShow = false;
+    
         public static GameManager _instance;
+        
+        public void ShowInventory(Inventory inventory)
+        {
+            if (!isInventoryShow)
+            {
+                HealthBarPanel.gameObject.SetActive(false);
+                PartyHealthBar.ForEach(p => p.gameObject.SetActive(false));
+                inventoryVisualize.Fire(inventory);
+                isInventoryShow = true;
+            }
+            else
+            {
+                HealthBarPanel.gameObject.SetActive(true);
+                PartyHealthBar.ForEach(p =>
+                {
+                    if (p.GetPlayer())
+                        p.gameObject.SetActive(true);
+                        
+                });
+                inventoryVisualize.Hide();
+                isInventoryShow = false;
+            }
+        }
 
         // Start is called before the first frame update
         void Start()

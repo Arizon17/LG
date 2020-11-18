@@ -6,15 +6,19 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerControlls : MonoBehaviourPunCallbacks
 {
     private PhotonView photonView;
+
+    [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshPro nickText;
     private PlayerStats stats;
     // Start is called before the first frame update
     void Start()
     {
+        inventory = GetComponent<Inventory>();
         photonView = GetComponent<PhotonView>();
         stats = GetComponent<PlayerStats>();
 
@@ -50,9 +54,25 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
                 transform.Translate(Time.deltaTime * 5 * Vector3.down);
             }
 
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.B))
             {
+                GameManager._instance.ShowInventory(inventory);
+            }
+        }
+    }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Interactable"))
+        {
+            var point = collision.contacts[0].point;
+            var component = collision.gameObject.GetComponent<Tilemap>();
+            TileBase tile = component.GetTile(component.layoutGrid.WorldToCell(point));
+            if (tile is ChestTile)
+            {
+                ChestTile _tile = (ChestTile)tile;
+                inventory.AddItemRangeToInventory(_tile.GetItems());
+                component.SetTile(component.layoutGrid.WorldToCell(point), null);
             }
         }
     }

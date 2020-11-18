@@ -15,12 +15,17 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
     {
         playerStat = new Stats();
         photonView = GetComponent<PhotonView>();
-        PhotonPeer.RegisterType(typeof(Stats), (byte)244, SerializeStats, DeserializeStats);
+        RegisterTypes();
         InitHealthBarPanel();
         if(photonView.IsMine)
             Camera.main.gameObject.transform.SetParent(transform);
     }
 
+    void RegisterTypes()
+    {
+        PhotonPeer.RegisterType(typeof(Stats), (byte)244, SerializeStats, DeserializeStats);
+        PhotonPeer.RegisterType(typeof(InventoryData), (byte)243, SerializeInventory, DeserializeInventory);
+    }
     void InitHealthBarPanel()
     {
         PlayerStats Player = this;
@@ -119,6 +124,35 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
         result.MaxMana = BitConverter.ToUInt16(bytes, 6);
         result.MaxMana = BitConverter.ToUInt16(bytes, 8);
         
+        return result;
+    }
+    public static byte[] SerializeInventory(object obj)
+    {
+        InventoryData inventory = (InventoryData) obj;
+        byte[] result;
+        if (inventory.itemIDs.Count > 0)
+        result = new byte[2 + inventory.itemIDs.Count];
+        else
+        result = new byte[2];
+        BitConverter.GetBytes(inventory.coins).CopyTo(result, 0);
+        for (int i = 0; i < inventory.itemIDs.Count;i++)
+        {
+            result[i + 2] = inventory.itemIDs[i];
+        }
+        return result;
+    }
+
+    public static object DeserializeInventory(byte[] bytes)
+    {
+        InventoryData result = new InventoryData(bytes.Length-2);
+        Debug.Log(bytes.Length);
+
+        result.coins = BitConverter.ToUInt16(bytes, 0);
+        for (int i = 2; i < bytes.Length;i++)
+        {
+            result.itemIDs.Add(bytes[i]);
+            Debug.Log("Deserialize : " + result.itemIDs[i-2]);
+        }
         return result;
     }
 }

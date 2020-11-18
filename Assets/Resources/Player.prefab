@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 5159962230989350023}
   - component: {fileID: 8390715219696484530}
   - component: {fileID: 1834068214447378350}
+  - component: {fileID: 790891527687330961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -267,6 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bead44f9e77e4b94ab90cabcc8241709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   nickText: {fileID: 3365316394153542892}
 --- !u!114 &8185034621691699973
 MonoBehaviour:
@@ -289,6 +291,7 @@ MonoBehaviour:
   - {fileID: 1734603063933482057}
   - {fileID: 6687812206136554082}
   - {fileID: 5159962230989350023}
+  - {fileID: 790891527687330961}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -441,6 +444,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &790891527687330961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718166848924740231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfd142a58d576641aa5e3aa9d9f9a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryData:
+    itemIDs: 
+    coins: 0
 --- !u!1 &6981849514922376188
 GameObject:
   m_ObjectHideFlags: 0
