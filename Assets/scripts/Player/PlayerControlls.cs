@@ -68,12 +68,64 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
             var point = collision.contacts[0].point;
             var component = collision.gameObject.GetComponent<Tilemap>();
             TileBase tile = component.GetTile(component.layoutGrid.WorldToCell(point));
+            Debug.Log(tile is InteractableTile);
+            if (tile is InteractableTile)
+            {
+                Debug.Log("yay, interactable!");
+                InteractableTile _tile = (InteractableTile) tile;
+                Debug.Log("need key to open " + _tile.needKeyToOpen);
+                if (_tile.needKeyToOpen)
+                {
+                    if (_tile.basicKey)
+                    {
+                        if (inventory.GetBasicKeysCount() > 0)
+                        {
+                            inventory.RemoveBasicKeyFromInventory();
+                            RemoveTileFromMap(component, component.layoutGrid.WorldToCell(point));
+                        }
+                        else return;
+                    }
+                    else
+                    {
+                        if (inventory.GetAdvancedKeyCount() > 0)
+                        {
+                            inventory.RemoveAdvancedKeyFromInventory();
+                            RemoveTileFromMap(component, component.layoutGrid.WorldToCell(point));
+                        }
+                        else return;
+                    }
+                }
+                else RemoveTileFromMap(component, component.layoutGrid.WorldToCell(point));
+            }
+            if (tile is PickUpableTile)
+            {
+                Debug.Log("yay, pick up!");
+                PickUpableTile _tile = (PickUpableTile) tile;
+                if (_tile.key)
+                {
+                    if (_tile.basicKeyToGive)
+                        inventory.AddBasicKeyToInventory();
+                    else
+                        inventory.AddAdvancedKeyToInventory();
+                }
+                else
+                inventory.AddItemToInventory(_tile.itemId);
+
+                RemoveTileFromMap(component, component.layoutGrid.WorldToCell(point));
+                return;
+            }
             if (tile is ChestTile)
             {
+                Debug.Log("Yay, chest!");
                 ChestTile _tile = (ChestTile)tile;
                 inventory.AddItemRangeToInventory(_tile.GetItems());
-                component.SetTile(component.layoutGrid.WorldToCell(point), null);
+                return;
             }
         }
+    }
+
+    void RemoveTileFromMap(Tilemap map, Vector3Int pos)
+    {
+        map.SetTile(pos, null);
     }
 }

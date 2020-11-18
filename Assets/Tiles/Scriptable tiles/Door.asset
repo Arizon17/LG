@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8f420ab30135d48aa386e23c5b09e5, type: 3}
-  m_Name: Chest Tile
+  m_Script: {fileID: 11500000, guid: f07506dfeac9eaa48adf8c2a78a0238c, type: 3}
+  m_Name: Door
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300168, guid: 3517ce70e66499b45b8c135b0279b3a3, type: 3}
+  m_Sprite: {fileID: 21300074, guid: 3517ce70e66499b45b8c135b0279b3a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,5 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 2
-  itemSetId: 0
+  needKeyToOpen: 1
+  basicKey: 1

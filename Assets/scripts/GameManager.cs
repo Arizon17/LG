@@ -111,7 +111,7 @@ namespace FamilyWikGame
         }
         public HealthBarPanel GetHealthBarByPlayer(PlayerStats player)
         {
-            return PartyHealthBar.First(p => p.GetPlayer().Equals(player));
+            return PartyHealthBar?.First(p => p.GetPlayer().Equals(player));
         }
 
         public void RemovePlayer(PlayerControlls player)

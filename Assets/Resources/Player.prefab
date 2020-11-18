@@ -459,6 +459,8 @@ MonoBehaviour:
   inventoryData:
     itemIDs: 
     coins: 0
+    basicKeyCount: 0
+    advancedKeyCount: 0
 --- !u!1 &6981849514922376188
 GameObject:
   m_ObjectHideFlags: 0

@@ -100,7 +100,6 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
             playerStat = (Stats) stream.ReceiveNext();
         }
     }
-    
     public static byte[] SerializeStats(object obj)
     {
         Stats playerStats = (Stats) obj;
@@ -131,10 +130,12 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
         InventoryData inventory = (InventoryData) obj;
         byte[] result;
         if (inventory.itemIDs.Count > 0)
-        result = new byte[2 + inventory.itemIDs.Count];
+        result = new byte[4 + inventory.itemIDs.Count];
         else
-        result = new byte[2];
+        result = new byte[4];
         BitConverter.GetBytes(inventory.coins).CopyTo(result, 0);
+        result[2] = inventory.basicKeyCount;
+        result[3] = inventory.advancedKeyCount;
         for (int i = 0; i < inventory.itemIDs.Count;i++)
         {
             result[i + 2] = inventory.itemIDs[i];
@@ -148,6 +149,8 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log(bytes.Length);
 
         result.coins = BitConverter.ToUInt16(bytes, 0);
+        result.basicKeyCount = bytes[2];
+        result.advancedKeyCount = bytes[3];
         for (int i = 2; i < bytes.Length;i++)
         {
             result.itemIDs.Add(bytes[i]);

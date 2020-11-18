@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Tile/ChestTile")]
-public class ChestTile : Tile
+public class ChestTile : InteractableTile
 {
     public byte itemSetId;
 

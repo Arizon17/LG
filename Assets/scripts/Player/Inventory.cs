@@ -46,13 +46,48 @@ public class Inventory : MonoBehaviour, IPunObservable
             inventoryData = (InventoryData) stream.ReceiveNext();
         }
     }
+
+    public byte GetBasicKeysCount()
+    {
+        return inventoryData.basicKeyCount;
+    }
+
+    public void RemoveBasicKeyFromInventory()
+    {
+        if (inventoryData.basicKeyCount > 0)
+        inventoryData.basicKeyCount--;
+    }
+
+    public byte GetAdvancedKeyCount()
+    {
+        return inventoryData.advancedKeyCount;
+    }
+
+    public void RemoveAdvancedKeyFromInventory()
+    {
+        if (inventoryData.advancedKeyCount > 0)
+        inventoryData.advancedKeyCount--;
+    }
+
+    public void AddBasicKeyToInventory()
+    {
+        if(inventoryData.basicKeyCount < byte.MaxValue)
+            inventoryData.basicKeyCount++;
+    }
+
+    public void AddAdvancedKeyToInventory()
+    {
+        if (inventoryData.advancedKeyCount < byte.MaxValue)
+            inventoryData.advancedKeyCount++;
+    }
 }
 [Serializable]
 public class InventoryData
 {
     public List<byte> itemIDs;
     public ushort coins;
-
+    public byte basicKeyCount;
+    public byte advancedKeyCount;
     public void AddToInventoryById(byte id)
     {
         itemIDs.Add(id);
