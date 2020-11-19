@@ -6,12 +6,11 @@ using UnityEngine.Tilemaps;
 [ExecuteAlways]
 public class SpawnLatternLight : MonoBehaviour
 {
-    private BoundsInt area;
-    [SerializeField] private GameObject LightPrefab;
+    [SerializeField] private GameObject lightPrefab;
     [SerializeField] private Tilemap map;
 
     [SerializeField]
-    private Transform LightHolder;
+    private Transform lightHolder;
     [ContextMenu("Spawn Laterns")]
     void SpawnLight()
     {
@@ -26,7 +25,7 @@ public class SpawnLatternLight : MonoBehaviour
                     if (map.GetTile(localPlace) is LaternTile)
                     {
                         LaternTile _tile = (LaternTile)map.GetTile(localPlace);
-                        GameObject light = Instantiate(LightPrefab, new Vector3(place.x, place.y, -1.5f),Quaternion.identity, LightHolder);
+                        GameObject light = Instantiate(lightPrefab, new Vector3(place.x, place.y, -1.5f),Quaternion.identity, lightHolder);
                         light.GetComponent<Light>().intensity = _tile.intensity;
                         light.GetComponent<Light>().range = _tile.range;
                     }

@@ -48,7 +48,7 @@ namespace FamilyWikGame
         }
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             InitPlayer();
             Init();
