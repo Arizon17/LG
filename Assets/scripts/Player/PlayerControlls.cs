@@ -109,7 +109,7 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
                         inventory.AddAdvancedKeyToInventory();
                 }
                 else
-                inventory.AddItemToInventory(_tile.itemId);
+                    inventory.AddItemToInventory(_tile.itemId);
 
                 RemoveTileFromMap(component, component.layoutGrid.WorldToCell(point));
                 return;
@@ -118,7 +118,10 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
             {
                 Debug.Log("Yay, chest!");
                 ChestTile _tile = (ChestTile)tile;
-                inventory.AddItemRangeToInventory(_tile.GetItems());
+                if (!_tile.itemSetWithChanceBool)
+                    inventory.AddItemRangeToInventory(_tile.GetItems());
+                else
+                    inventory.AddItemRangeToInventory(_tile.GetItemsWithChange());
                 return;
             }
         }

@@ -12,7 +12,9 @@ public class DungeonItemSet: ScriptableObject
     public struct ItemSet
     {
         public byte itemSetId;
+        public string itemSetName;
         public List<byte>  itemId;
+        
     }
 
     [SerializeField] private List<ItemSet> dungeonItemSets;

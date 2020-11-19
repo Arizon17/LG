@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonItemSets:
   - itemSetId: 0
-    itemId: 0064
+    itemSetName: Idk what items set
+    itemId: 0001
+  - itemSetId: 1
+    itemSetName: Potion Set
+    itemId: 0203

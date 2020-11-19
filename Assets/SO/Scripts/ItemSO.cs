@@ -14,6 +14,15 @@ public class ItemSO : ScriptableObject
     {
         return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemSprite;
     }
+
+    public string GetNameById(int id)
+    {
+        return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemName;
+    }
+    public string GetDescriptionById(int id)
+    {
+        return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemDescription;
+    }
 }
 [Serializable]
 public class VisualizeItem
@@ -25,4 +34,7 @@ public class VisualizeItem
     public WeaponData weaponData;
     [PreviewField(100)]
     public Sprite itemSprite;
+
+    public string itemName;
+    public string itemDescription;
 }
