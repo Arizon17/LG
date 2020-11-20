@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 namespace FamilyWikGame
@@ -21,6 +22,8 @@ namespace FamilyWikGame
         public ItemSO itemSo;
         [SerializeField] private CreateInventory inventoryVisualize;
         private bool isInventoryShow = false;
+
+        [SerializeField] public Tilemap walkableTileMap, wallTileMap, interactableTileMap;
     
         public static GameManager _instance;
         

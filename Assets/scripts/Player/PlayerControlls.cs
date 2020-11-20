@@ -15,13 +15,21 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
     [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshPro nickText;
     private PlayerStats stats;
+
+    private Astar myAstar;
+    
+    private Stack<Vector3Int> path;
+    private Vector3 goal;
+    private Vector3 destination;
+    private Vector3 current;
+
     // Start is called before the first frame update
     void Start()
     {
         inventory = GetComponent<Inventory>();
         photonView = GetComponent<PhotonView>();
         stats = GetComponent<PlayerStats>();
-
+        myAstar = GetComponent<Astar>();
         nickText.SetText(photonView.Owner.NickName);
 
         if (photonView.IsMine)
@@ -32,35 +40,65 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
         
     }
 
+    void InitPath(Vector3Int target)
+    {
+        path = null;
+        target = new Vector3Int(target.x, target.y, 0);
+        if (target != transform.position)
+        {
+            myAstar.Algorithm(out path, Vector3Int.FloorToInt(target));
+        }
+
+        if (path != null)
+        {
+            current = path.Peek();
+            destination = path.Peek();
+            goal = target;
+        } 
+    }
     // Update is called once per frame
     void Update()
     {
         if (photonView.IsMine)
         {
-            if (Input.GetKey(KeyCode.W))
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            if (Input.GetMouseButton(0))
             {
-                transform.Translate(Time.deltaTime * 5 * Vector3.up);
+                Vector3Int worldPos = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition)); 
+                InitPath(worldPos);
             }
-            if (Input.GetKey(KeyCode.A))
+#endif
+#if UNITY_ANDROID
+            if (Input.touchCount > 0)
             {
-                transform.Translate(Time.deltaTime * 5 * Vector3.left);
+                var touch = Input.touches[0];
+                Vector3Int worldPos = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(touch.position));
+                InitPath(worldPos);
             }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(Time.deltaTime * 5 * Vector3.right);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                transform.Translate(Time.deltaTime * 5 * Vector3.down);
-            }
-
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                GameManager._instance.ShowInventory(inventory);
-            }
+#endif
         }
     }
 
+    void FixedUpdate()
+    {
+        if (path != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destination, 5 * Time.deltaTime);
+            float distance = Vector2.Distance(destination, transform.position);
+            if (distance <= 0f)
+            {
+                if (path.Count > 0)
+                {
+                    current = destination;
+                    destination = path.Pop();
+                }
+                else
+                {
+                    path = null;
+                }
+            }
+        }
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Interactable"))

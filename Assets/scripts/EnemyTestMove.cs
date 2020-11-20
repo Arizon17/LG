@@ -26,13 +26,13 @@ public class EnemyTestMove : MonoBehaviour
 
     void Init()
     {
+        current = goal = current = targetPos = goal = new Vector3();
         target = FindObjectOfType<PlayerControlls>().gameObject.transform;
         targetPos = target.position;
         if (target.position != transform.position)
         {
             myAstar.Algorithm(out path, Vector3Int.FloorToInt(targetPos));
         }
-
         if (path != null)
         {
             current = path.Pop();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FamilyWikGame;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,10 +16,14 @@ public class Astar : MonoBehaviour
     [SerializeField] private Vector3Int goalPos;
     private Stack<Vector3Int> path;
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Tilemap wall, interactable;
     [SerializeField] private Tile tile;
     [ContextMenu("Start Path")]
     public void Algorithm(out Stack<Vector3Int> dest, Vector3Int goal)
     {
+        tilemap = GameManager._instance.walkableTileMap;
+        wall = GameManager._instance.wallTileMap;
+        interactable = GameManager._instance.interactableTileMap;
         goalPos = goal;
         if (currentNode == null)
             Init();
@@ -48,6 +53,11 @@ public class Astar : MonoBehaviour
         for (int i = 0; i < neighbors.Count; i++)
         {
             Node neighbor = neighbors[i];
+            if (ConnectedDiagonally(current, neighbor))
+            {
+                continue;
+            }
+            
             int gScore = DetermineGScore(neighbors[i].position, current.position);
 
             if (openList.Contains(neighbor))
@@ -101,6 +111,21 @@ public class Astar : MonoBehaviour
             current = openList.OrderBy(p => p.f).First();
         }
     }
+
+    private bool ConnectedDiagonally(Node current, Node neighbor)
+    {
+        Vector3Int direction = currentNode.position - neighbor.position;
+        
+        Vector3Int first = new Vector3Int(current.position.x + direction.x * -1, current.position.y, current.position.z);
+        Vector3Int second = new Vector3Int(current.position.x, current.position.y + direction.y * -1, current.position.z);
+
+        if (wall.GetTile(first) != null || wall.GetTile(second) != null || interactable.GetTile(first) != null || interactable.GetTile(second) != null)
+        {
+            return true;
+        }
+        else return false;
+    }
+    
     private List<Node> FindNeighbors(Vector3Int parentPosition)
     {
         List<Node> neighbors = new List<Node>();
@@ -112,7 +137,7 @@ public class Astar : MonoBehaviour
                 if (x != 0 || y != 0)
                 {
                     if (tilemap.GetTile(neighborPosition))
-                    neighbors.Add(GetNode(neighborPosition));
+                        neighbors.Add(GetNode(neighborPosition));
                 }
             }
         }
