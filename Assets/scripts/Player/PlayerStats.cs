@@ -17,8 +17,11 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IPunObservable
         photonView = GetComponent<PhotonView>();
         RegisterTypes();
         InitHealthBarPanel();
-        if(photonView.IsMine)
+        if (photonView.IsMine)
+        {
             Camera.main.gameObject.transform.SetParent(transform);
+            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.z, -2);
+        }
     }
 
     void RegisterTypes()

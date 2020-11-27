@@ -28,6 +28,7 @@ public class EnemyTestMove : MonoBehaviour
     {
         current = goal = current = targetPos = goal = new Vector3();
         target = FindObjectOfType<PlayerControlls>().gameObject.transform;
+        if ( Vector3.Distance(transform.position, target.transform.position) < attackRange)
         targetPos = target.position;
         if (target.position != transform.position)
         {
@@ -64,6 +65,7 @@ public class EnemyTestMove : MonoBehaviour
                 else
                 {
                     path = null;
+                    current = goal = current = targetPos = goal = new Vector3();
                     Init();
                 }
             }

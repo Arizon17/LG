@@ -42,6 +42,8 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
 
     void InitPath(Vector3Int target)
     {
+        if (photonView.IsMine)
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -2);
         path = null;
         target = new Vector3Int(target.x, target.y, 0);
         if (target != transform.position)
@@ -104,9 +106,13 @@ public class PlayerControlls : MonoBehaviourPunCallbacks
         if (collision.gameObject.tag.Equals("Interactable"))
         {
             var point = collision.contacts[0].point;
+            foreach (var VARIABLE in collision.contacts)
+            {
+                Debug.Log(VARIABLE.point);
+            }
+            Debug.Log(point);
             var component = collision.gameObject.GetComponent<Tilemap>();
             TileBase tile = component.GetTile(component.layoutGrid.WorldToCell(point));
-            Debug.Log(tile is InteractableTile);
             if (tile is InteractableTile)
             {
                 Debug.Log("yay, interactable!");
