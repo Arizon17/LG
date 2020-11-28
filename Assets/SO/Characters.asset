@@ -22,7 +22,7 @@ MonoBehaviour:
       \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u0436\u0435\u0439"
     biographyId: 0001
     characterIcon: {fileID: 21300000, guid: 2375b3b69868859408c7afc2675e4f31, type: 3}
-    skillList: 00
+    skillList: 00010304
     health: 31
     maxHealth: 31
     damage: 6
@@ -32,7 +32,7 @@ MonoBehaviour:
     description: 
     biographyId: 0102
     characterIcon: {fileID: 21300000, guid: 920f8fd2b2a349e48aadf707e227190c, type: 3}
-    skillList: 00
+    skillList: 00010205
     health: 21
     maxHealth: 21
     damage: 8
@@ -42,7 +42,7 @@ MonoBehaviour:
     description: 
     biographyId: 00
     characterIcon: {fileID: 21300000, guid: eeb80a26f5fd1f44db35a265a4c1f3d8, type: 3}
-    skillList: 
+    skillList: 0102030405
     health: 24
     maxHealth: 24
     damage: 11
@@ -52,9 +52,29 @@ MonoBehaviour:
     description: 
     biographyId: 01
     characterIcon: {fileID: 21300000, guid: ea60807fe5396f743ab909bd51cb5084, type: 3}
-    skillList: 
+    skillList: 000105
     health: 17
     maxHealth: 17
     damage: 3
     critChance: 90
     hitChance: 85
+  - name: "\u041F\u044F\u0442\u044B\u0439"
+    description: 
+    biographyId: 0002
+    characterIcon: {fileID: 21300000, guid: 04be4b1421ac810418207a59d6b0771b, type: 3}
+    skillList: 01030405
+    health: 17
+    maxHealth: 17
+    damage: 4
+    critChance: 21
+    hitChance: 91
+  - name: "\u0428\u0435\u0441\u0442\u043E\u0439"
+    description: 
+    biographyId: 
+    characterIcon: {fileID: 21300000, guid: 85b3f74ec0ca3bd4fb5e73c9d0119f99, type: 3}
+    skillList: 030405
+    health: 19
+    maxHealth: 19
+    damage: 5
+    critChance: 21
+    hitChance: 19

@@ -14,6 +14,7 @@ public class SpawnCharacterInGuild : MonoBehaviour
     [SerializeField] private CharacterSO characterSo;
     [SerializeField] private BiographySO biographySo;
     [SerializeField] private CharacterBar characterStatBar;
+    [SerializeField] private Spells spellSo;
     
     [ContextMenu("refresh characters")]
     public void Start()
@@ -42,6 +43,7 @@ public class SpawnCharacterInGuild : MonoBehaviour
     public void ShowCharacter(Character character)
     {
         characterStatBar.ClearBio();
+        characterStatBar.ClearSkills();
         characterStatBar.description.text = character.description; 
         characterStatBar.name.text = character.name;
         characterStatBar.hpText.text = character.maxHealth.ToString();
@@ -53,6 +55,11 @@ public class SpawnCharacterInGuild : MonoBehaviour
         {
             var _t = Instantiate(characterStatBar.biographyPrefab, characterStatBar.biographyHolder);
             _t.text = biographySo.GetBiographyTypeById(biog).name;
+        }
+        foreach (byte id in character.skillList)
+        {
+            var _t = Instantiate(characterStatBar.skillIconPrefab, characterStatBar.skillHolder);
+            _t.transform.GetChild(0).GetComponent<Image>().sprite = spellSo.GetSpellById(id).SpellIcon;
         }
     }
     private List<Character> InstantiateRandomCharacters()

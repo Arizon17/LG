@@ -26,4 +26,9 @@ public class Spells : ScriptableObject
         [BoxGroup("Effect Settings")] [ShowIf("hasEffect")] public List<EffectSO> effectIdList;
     }
     [SerializeField] public List<SpellType> SpellList;
+
+    public SpellType GetSpellById(int id)
+    {
+        return SpellList[id];
+    }
 }

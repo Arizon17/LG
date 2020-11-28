@@ -15,15 +15,25 @@ public class CharacterBar : MonoBehaviour
     public Text hitChanceText;
     public Image characterIcon;
     public Transform biographyHolder;
+    public Transform skillHolder;
+    public Image skillIconPrefab;
 
     private void OnDisable()
     {
         ClearBio();
+        ClearSkills();
     }
 
     public void ClearBio()
     {
         foreach (Transform o in biographyHolder)
+        {
+            Destroy(o.gameObject);
+        }
+    }
+    public void ClearSkills()
+    {
+        foreach (Transform o in skillHolder)
         {
             Destroy(o.gameObject);
         }
