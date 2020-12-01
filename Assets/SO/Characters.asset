@@ -78,7 +78,7 @@ MonoBehaviour:
     damage: 5
     critChance: 21
     hitChance: 19
-  - name: Anthony Devis
+  - name: Anthony
     description: some text
     biographyId: 0105
     characterIcon: {fileID: 21300000, guid: 5331c568d19b03842a1e7957beb28194, type: 3}

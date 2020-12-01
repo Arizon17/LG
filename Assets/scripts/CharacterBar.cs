@@ -17,6 +17,7 @@ public class CharacterBar : MonoBehaviour
     public Transform biographyHolder;
     public Transform skillHolder;
     public Image skillIconPrefab;
+    public Text spellDescription;
 
     private void OnDisable()
     {

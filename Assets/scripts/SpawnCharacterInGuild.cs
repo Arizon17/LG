@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using Character = CharacterSO.Character;
+using Spell = Spells.SpellType;
 public class SpawnCharacterInGuild : MonoBehaviour
 {
     [SerializeField] private CharacterSlotInGuild slotPrefab;
@@ -40,10 +41,11 @@ public class SpawnCharacterInGuild : MonoBehaviour
             });
         }
     }
-    public void ShowCharacter(Character character)
+    void ShowCharacter(Character character)
     {
         characterStatBar.ClearBio();
         characterStatBar.ClearSkills();
+        characterStatBar.spellDescription.gameObject.SetActive(false);
         characterStatBar.description.text = character.description; 
         characterStatBar.name.text = character.name;
         characterStatBar.hpText.text = character.maxHealth.ToString();
@@ -60,6 +62,25 @@ public class SpawnCharacterInGuild : MonoBehaviour
         {
             var _t = Instantiate(characterStatBar.skillIconPrefab, characterStatBar.skillHolder);
             _t.transform.GetChild(0).GetComponent<Image>().sprite = spellSo.GetSpellById(id).SpellIcon;
+            _t.gameObject.AddComponent<Button>().onClick.AddListener(()=>SpellDescription(spellSo.GetSpellById(id)));
+        }
+    }
+
+    void SpellDescription(Spell spell)
+    {
+        if (characterStatBar.spellDescription.name != spell.name)
+        {
+            characterStatBar.spellDescription.text =
+                "Spell target : " + spell.target + " |Spell str : " + spell.strength +
+                " |Spell crit chance : " + spell.critChance + " |Spell hit chance : " +
+                spell.hitChance;
+            characterStatBar.spellDescription.name = spell.name;
+            characterStatBar.spellDescription.gameObject.SetActive(true);
+        }
+        else
+        {
+            characterStatBar.spellDescription.name = "";
+            characterStatBar.spellDescription.gameObject.SetActive(false);
         }
     }
     private List<Character> InstantiateRandomCharacters()
