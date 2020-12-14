@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ab45bfc3ebf094dab7b74fba9e7017, type: 3}
+  m_Name: Monsters
+  m_EditorClassIdentifier: 
+  monsterList:
+  - prioritySlot: 1
+    hp: 36
+    maxHp: 36
+    damage: 4
+    critChance: 12
+    hitChance: 95
+    skillList: 00
+    monsterIcon: {fileID: 21300000, guid: 31421a99739a12746aa2fa10b35e3a5b, type: 3}
+    name: Demon
+  - prioritySlot: 3
+    hp: 19
+    maxHp: 21
+    damage: 6
+    critChance: 5
+    hitChance: 90
+    skillList: 
+    monsterIcon: {fileID: 21300000, guid: 012111939a4799049a143af6c5d48ebb, type: 3}
+    name: "\u0425\u0443\u0439 \u0437 \u0433\u043E\u0440\u0438"

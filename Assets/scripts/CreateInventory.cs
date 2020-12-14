@@ -17,7 +17,7 @@ public class CreateInventory : MonoBehaviour
             Debug.Log("In foreach " + item);
             var itemHolder = Instantiate(itemHolderPrefab,transform);
             itemHolder.transform.localScale = new Vector3(1,1,1);
-            itemHolder.ChangeSprite(GameManager._instance.itemSo.GetSpriteById(item));
+            //itemHolder.ChangeSprite(GameManager._instance.itemSo.GetSpriteById(item));
 
         }
     }

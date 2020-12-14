@@ -17,5 +17,6 @@ MonoBehaviour:
     description: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 \u043F\u0435\u0440\u0435\u043E\u0434\u0438\u0447\u0435\u0441\u043A\u0438\u0439
       \u0443\u0440\u043E\u043D \u043E\u0433\u043D\u0451\u043C"
     effectIcon: {fileID: 21300000, guid: ef0456a293c284fc5b17c8311f6bcd6d, type: 3}
-    duration: 5
+    duration: 3
     strenght: 2
+    effectType: 0

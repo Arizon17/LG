@@ -20,15 +20,15 @@ MonoBehaviour:
     spellTypeEffect: 1
     critChance: 10
     hitChance: 85
-    strength: 0
+    strength: 10
     target: 1
-    targetCount: 0
+    AdditionaltargetCount: 0
     multiplyTargetType: 0
     increaseStrengthPerLvl: 0
     increaseHitChance0PerLvl: 0
     increaseCritChancePerLvl: 0
     hasEffect: 1
-    chanceToApplyEffect: 90
+    chanceToApplyEffect: 45
     effectIdList:
     - {fileID: 11400000, guid: 5b7f8e306ff06474d9677a85c5b0767d, type: 2}
   - SpellIcon: {fileID: 21300000, guid: 52472852bfa7f44f9a072dac4bda75af, type: 3}
@@ -36,10 +36,10 @@ MonoBehaviour:
     description: 
     spellTypeEffect: 1
     critChance: 12
-    hitChance: 17
-    strength: 0
+    hitChance: 75
+    strength: 6
     target: 4
-    targetCount: 2
+    AdditionaltargetCount: 1
     multiplyTargetType: 0
     increaseStrengthPerLvl: 0
     increaseHitChance0PerLvl: 0
@@ -52,43 +52,28 @@ MonoBehaviour:
     description: 
     spellTypeEffect: 1
     critChance: 0
-    hitChance: 0
-    strength: 0
+    hitChance: 85
+    strength: 6
     target: 1
-    targetCount: 0
+    AdditionaltargetCount: 0
     multiplyTargetType: 0
     increaseStrengthPerLvl: 0
     increaseHitChance0PerLvl: 0
     increaseCritChancePerLvl: 0
-    hasEffect: 0
-    chanceToApplyEffect: 0
-    effectIdList: []
-  - SpellIcon: {fileID: 21300000, guid: 3b3b9e564de1040fbba7043ec6f3772f, type: 3}
-    name: "\u041F\u0440\u0438\u0446\u0435\u043B\u044C\u043D\u044B\u0439 \u0432\u044B\u0441\u0442\u0440\u0435\u043B"
-    description: 
-    spellTypeEffect: 1
-    critChance: 0
-    hitChance: 0
-    strength: 0
-    target: 1
-    targetCount: 0
-    multiplyTargetType: 0
-    increaseStrengthPerLvl: 0
-    increaseHitChance0PerLvl: 0
-    increaseCritChancePerLvl: 0
-    hasEffect: 0
-    chanceToApplyEffect: 0
-    effectIdList: []
+    hasEffect: 1
+    chanceToApplyEffect: 100
+    effectIdList:
+    - {fileID: 11400000, guid: 5b7f8e306ff06474d9677a85c5b0767d, type: 2}
   - SpellIcon: {fileID: 21300000, guid: c51e97c4ececa4321ad5445f9bd802e4, type: 3}
     name: "\u041A\u0443\u043B\u0430\u043A\u0438 \u0442\u044B\u0441\u044F\u0447\u0438
       \u043B\u0443\u043D"
     description: 
     spellTypeEffect: 1
-    critChance: 0
-    hitChance: 0
-    strength: 0
+    critChance: 15
+    hitChance: 95
+    strength: 13
     target: 1
-    targetCount: 0
+    AdditionaltargetCount: 0
     multiplyTargetType: 0
     increaseStrengthPerLvl: 0
     increaseHitChance0PerLvl: 0
@@ -101,14 +86,32 @@ MonoBehaviour:
     description: 
     spellTypeEffect: 0
     critChance: 0
-    hitChance: 0
-    strength: 0
-    target: 2
-    targetCount: 0
+    hitChance: 85
+    strength: 5
+    target: 0
+    AdditionaltargetCount: 0
     multiplyTargetType: 0
     increaseStrengthPerLvl: 0
     increaseHitChance0PerLvl: 0
     increaseCritChancePerLvl: 0
-    hasEffect: 0
-    chanceToApplyEffect: 0
-    effectIdList: []
+    hasEffect: 1
+    chanceToApplyEffect: 50
+    effectIdList:
+    - {fileID: 11400000, guid: 68a1c6b9cdc8a5e4c89e391ddea1a470, type: 2}
+  - SpellIcon: {fileID: 21300000, guid: 8ff8ffe0e21954981a0bd560cf44f005, type: 3}
+    name: "\u041E\u0433\u043D\u0435\u043D\u044B\u0439 \u0441\u043C\u0435\u0440\u0447"
+    description: 
+    spellTypeEffect: 1
+    critChance: 0
+    hitChance: 95
+    strength: 6
+    target: 4
+    AdditionaltargetCount: 0
+    multiplyTargetType: 3
+    increaseStrengthPerLvl: 0
+    increaseHitChance0PerLvl: 0
+    increaseCritChancePerLvl: 0
+    hasEffect: 1
+    chanceToApplyEffect: 65
+    effectIdList:
+    - {fileID: 11400000, guid: 06908e0d80f3bf943bf2110ccd627442, type: 2}

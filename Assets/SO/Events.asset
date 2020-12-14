@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e04538d295dfea4ca881893f5ebc9b7, type: 3}
+  m_Name: Events
+  m_EditorClassIdentifier: 
+  events:
+  - eventType: 2
+    targetSlot: 
+    effect: {fileID: 11400000, guid: 5b7f8e306ff06474d9677a85c5b0767d, type: 2}
+    monsterIds: 
+    moneyCount: 0
+    SingleItem: 0
+    item: {fileID: 0}
+    items: []
+  - eventType: 3
+    targetSlot: 
+    effect: {fileID: 0}
+    monsterIds: 0100000000000000
+    moneyCount: 0
+    SingleItem: 0
+    item: {fileID: 0}
+    items: []
+  - eventType: 0
+    targetSlot: 
+    effect: {fileID: 0}
+    monsterIds: 
+    moneyCount: 15
+    SingleItem: 0
+    item: {fileID: 0}
+    items: []
+  - eventType: 2
+    targetSlot: 
+    effect: {fileID: 11400000, guid: 06908e0d80f3bf943bf2110ccd627442, type: 2}
+    monsterIds: 
+    moneyCount: 0
+    SingleItem: 0
+    item: {fileID: 0}
+    items: []
+  - eventType: 1
+    targetSlot: 
+    effect: {fileID: 0}
+    monsterIds: 
+    moneyCount: 0
+    SingleItem: 1
+    item: {fileID: 11400000, guid: c33dd4ccf9e521d45a4e1796533b2535, type: 2}
+    items: []

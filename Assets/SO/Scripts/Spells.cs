@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 
 [Serializable, CreateAssetMenu(menuName = "SO/Spells")]
@@ -47,8 +48,8 @@ public class Spells : ScriptableObject
         [BoxGroup("Status Settings")] public byte strength;
         [BoxGroup("Status Settings")] public SpellTarget target;
 
-        [BoxGroup("Status Settings")] [ShowIf("MultiplyAlly")]
-        public byte targetCount;
+        [BoxGroup("Status Settings")] [ShowIf("MultiplyAlly")] [Max(2)]
+        public byte AdditionaltargetCount;
 
         [BoxGroup("Status Settings")] [ShowIf("MultiplyAlly")]
         public MultiplyTarget multiplyTargetType;

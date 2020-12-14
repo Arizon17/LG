@@ -8,20 +8,11 @@ using UnityEngine;
 [Serializable, CreateAssetMenu(menuName = "SO/Items")]
 public class ItemSO : ScriptableObject
 {
-    public List<VisualizeItem> items;
+    public VisualizeItem item;
 
-    public Sprite GetSpriteById(int id)
+    public int GetItemId()
     {
-        return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemSprite;
-    }
-
-    public string GetNameById(int id)
-    {
-        return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemName;
-    }
-    public string GetDescriptionById(int id)
-    {
-        return items.First(p => p.itemData.itemId == id || p.weaponData.itemId == id).itemDescription;
+        return item.itemData.itemId;
     }
 }
 [Serializable]
